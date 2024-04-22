@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface UserService {
     List<UserDto> getAllUsers();
-    Optional<UserDto> getUserByName(String nombre);
-    Optional<UserDto> getUserByLastName(String apellidos);
-    Optional<UserDto> getUserByRol(Enum rol);
+    Optional<UserDto> getUserById(Long userId);
     UserDto saveUser(UserDto userDto);
+    Optional<UserDto> updateUser(Long userId, UserDto userDto);
     void deleteUser(Long userId);
+
 }

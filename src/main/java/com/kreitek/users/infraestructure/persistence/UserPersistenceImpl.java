@@ -36,9 +36,4 @@ public class UserPersistenceImpl implements UserPersistence {
     public void deleteUser(Long userId) {
         this.userRepository.deleteById(userId);
     }
-
-    @Override
-    public Optional<User> getUserByName() {
-        return null;
-    }
 }

@@ -185,3 +185,11 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: E:/Bootcamp-Nuns
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 55 more
+2024-04-22 21:16:15.268395+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]LAST_NAME"
+Syntax error in SQL statement "[*]LAST_NAME"; SQL statement:
+LAST_NAME [42000-224]
+2024-04-22 21:16:18.924598+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]LAST_NAME USERS"
+Syntax error in SQL statement "[*]LAST_NAME USERS"; SQL statement:
+LAST_NAME USERS [42000-224]

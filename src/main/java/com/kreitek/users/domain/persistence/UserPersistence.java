@@ -11,6 +11,4 @@ public interface UserPersistence {
     Optional<User> getUserById(Long userId);
     User saveUser(User user);
     void deleteUser(Long userId);
-
-    Optional<User> getUserByName();
 }
