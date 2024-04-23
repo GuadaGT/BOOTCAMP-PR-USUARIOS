@@ -1,1 +1,66 @@
-<p>user-form works!</p>
+
+<h1>Ficha de artículo</h1>
+{{ mode }} // {{ userId }}
+
+<form *ngIf="user" #itemForm="ngForm" name="itemForm" role="form" novalidate autocomplete="off">
+
+  <!-- Id: solo visible si estamos en edición (pero no será editable) -->
+  <div class="form-group">
+
+    <input disbled type="number" [(ngModel)]="user.id" name="id" class="form-control" id="price" #price="ngModel">
+  </div>
+
+  <!-- Nombre -->
+  <div class="form-group">
+    <label for="name">Nombre</label>
+    <input type="text" [(ngModel)]="user.nombre" name="name" class="form-control" id="name" #name="ngModel" required minlength="3" maxlength="100">
+  </div>
+  <div *ngIf="(name.dirty && name.errors)">
+    <small class="form-text text-danger"
+           *ngIf="name.errors['required']">
+      Este campo es requerido
+    </small>
+    <small class="form-text text-danger"
+           *ngIf="name.errors['minlength']">
+      Este campo tiene que tener una longitud mínima de 3 caracteres
+    </small>
+  </div>
+
+  <!-- Apellidos -->
+  <div class="form-group">
+    <label for="apellidos">Apellidos</label>
+    <input type="text" [(ngModel)]="user.apellidos" name="apellidos" class="form-control" id="apellidos" #name="ngModel" required minlength="3" maxlength="100">
+  </div>
+  <div *ngIf="(name.dirty && name.errors)">
+    <small class="form-text text-danger"
+           *ngIf="name.errors['required']">
+      Este campo es requerido
+    </small>
+    <small class="form-text text-danger"
+           *ngIf="name.errors['minlength']">
+      Este campo tiene que tener una longitud mínima de 6 caracteres
+    </small>
+  </div>
+
+  <!-- Email -->
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" [(ngModel)]="user.email" name="apellidos" class="form-control" id="email" #name="ngModel" required minlength="3" maxlength="100">
+  </div>
+  <div *ngIf="(name.dirty && name.errors)">
+    <small class="form-text text-danger"
+           *ngIf="name.errors['required']">
+      Este campo es requerido
+    </small>
+    <small class="form-text text-danger"
+           *ngIf="name.errors['minlength']">
+      Este campo tiene que tener una longitud mínima de 6 caracteres
+    </small>
+  </div>
+
+
+  <div class="buttonsForm">
+    <button (click)="saveUser()" [disabled]="itemForm.invalid">Guardar</button>
+  </div>
+
+</form>

@@ -1,8 +1,13 @@
 package com.kreitek.users.infraestructure.persistence;
 
+import com.kreitek.users.application.dto.UserDto;
 import com.kreitek.users.domain.entity.User;
 import com.kreitek.users.domain.persistence.UserPersistence;
+import com.kreitek.users.infraestructure.specs.UserSpecification;
+import com.kreitek.users.infraestructure.specs.shared.SearchCriteriaHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,6 +28,12 @@ public class UserPersistenceImpl implements UserPersistence {
         return this.userRepository.findAll();
     }
 
+    @Override
+    public Page<User> findAll(Pageable pageable, String filters){
+        UserSpecification specification = new UserSpecification(SearchCriteriaHelper.fromFilterString(filters));
+        return this.userRepository.findAll(specification, pageable);
+
+    }
     @Override
     public Optional<User> getUserById(Long userId) {
         return this.userRepository.findById(userId);

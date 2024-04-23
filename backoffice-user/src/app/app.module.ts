@@ -8,6 +8,11 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { UserListComponent } from './entities/user/user-list/user-list.component';
 import { UserFormComponent } from './entities/user/user-form/user-form.component';
+import {HttpClientModule} from "@angular/common/http";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserEditComponent } from './entities/user/user-edit/user-edit.component';
 
 
 @NgModule({
@@ -17,11 +22,17 @@ import { UserFormComponent } from './entities/user/user-form/user-form.component
     NavbarComponent,
     FooterComponent,
     UserListComponent,
-    UserFormComponent
+    UserFormComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
