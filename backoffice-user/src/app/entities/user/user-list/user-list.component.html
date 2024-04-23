@@ -1,6 +1,8 @@
 <div class="container">
 <h1>Gestión usuarios</h1>
+  <!-- TODO: Crear Filtros -->
 <a><i class="fa fa-filter"></i></a>
+  <div>
 <table *ngIf="users.length > 0">
   <thead>
   <th>Id</th>
@@ -26,15 +28,18 @@
       {{ user.rol }}
     </td>
     <td>
-      <a [routerLink]="['/users/edit', user.id]"><i class="far fa-edit"></i></a>
+      <a [routerLink]="['/users', 'reactive',  user.id ]"><i class="far fa-edit"></i></a>
       <a (click)="prepareUserToDelete(user.id!)"><i class="fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete" ></i></a>
     </td>
   </tr>
   </tbody>
 </table>
+  </div>
 
-<button type="button" class="btn btn-success"  [routerLink]="['/users/create']">Crear Usuario</button>
-
+  <div class="btn-create-user">
+    <button type="button" class="btn btn-success"  [routerLink]="['/users' , 'new']">Crear Usuario</button>
+  </div>
+  <!-- TODO: Hacer paginación -->
 <nav aria-label="Page navigation example">
   <ul class="pagination">
     <li class="page-item">

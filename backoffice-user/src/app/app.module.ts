@@ -12,7 +12,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UserEditComponent } from './entities/user/user-edit/user-edit.component';
+import { UserReactiveFormComponent } from './entities/user/user-reactive-form/user-reactive-form.component';
+
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import { UserEditComponent } from './entities/user/user-edit/user-edit.component
     FooterComponent,
     UserListComponent,
     UserFormComponent,
-    UserEditComponent
+    UserReactiveFormComponent,
   ],
   imports: [
     BrowserModule,

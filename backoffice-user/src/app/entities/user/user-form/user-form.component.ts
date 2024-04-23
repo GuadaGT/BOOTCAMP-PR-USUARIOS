@@ -19,12 +19,24 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit(): void {
     const entryParam: string = this.route.snapshot.paramMap.get("userId") ?? "new";
+    if (entryParam !== "new") {
+      this.userId = +this.route.snapshot.paramMap.get("itemId")!;
+      this.mode = "UPDATE";
+      this.getUserById(this.userId!);
+    } else {
+      this.mode = "NEW";
       this.initializeUser();
-
+    }
   }
 
   public saveUser(): void {
+    if (this.mode === "NEW") {
       this.insertUser();
+    }
+
+    if (this.mode === "UPDATE") {
+      this.updateUser();
+    }
     }
 
   public selectRole(event: Event): void {
@@ -44,7 +56,24 @@ export class UserFormComponent implements OnInit {
       error: (err) => { this.handleError(err); }
     })
   }
+  private updateUser(): void {
+    this.userService.update(this.user!).subscribe({
+      next: (userUpdated) => {
+        console.log("Modificado correctamente");
+        console.log(userUpdated);
+      },
+      error: (err) => {this.handleError(err);}
+    })
+  }
 
+  private getUserById(userId: number) {
+    this.userService.getUserById(userId).subscribe({
+      next: (userRequest) => {
+        this.user = userRequest;
+      },
+      error: (err) => {this.handleError(err);}
+    })
+  }
 
   private initializeUser(): void {
     this.user = new User(undefined, "", "", "", UserRole.ADMINISTRADOR);
@@ -53,4 +82,6 @@ export class UserFormComponent implements OnInit {
   private handleError(error: any): void {
     console.log(error);
   }
+
+
 }

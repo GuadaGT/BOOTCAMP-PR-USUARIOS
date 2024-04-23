@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home.component";
 import {UserListComponent} from "./entities/user/user-list/user-list.component";
-import {UserEditComponent} from "./entities/user/user-edit/user-edit.component";
 import {UserFormComponent} from "./entities/user/user-form/user-form.component";
+import {UserReactiveFormComponent} from "./entities/user/user-reactive-form/user-reactive-form.component";
 
 const routes: Routes = [
   {
@@ -16,13 +16,13 @@ const routes: Routes = [
     component: UserListComponent,
   },
   {
-    path: 'users/create',
+    path: 'users/:userId',
     component: UserFormComponent,
   },
   {
-    path: 'users/edit/:id',
-    component: UserEditComponent,
-  }
+    path: 'users/reactive/:userId',
+    component: UserReactiveFormComponent,
+  },
 ];
 
 @NgModule({

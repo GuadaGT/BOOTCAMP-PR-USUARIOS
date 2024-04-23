@@ -1,10 +1,8 @@
 <footer class="py-3  bg-dark">
   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-    <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Listar</a></li>
-    <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Crear</a></li>
-    <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Editar</a></li>
-    <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Borrar</a></li>
-    <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Filtrar</a></li>
+    <li class="nav-item"><a [routerLink]="['users']" class="nav-link px-2 text-white">Listar</a></li>
+    <li class="nav-item"><a [routerLink]="['/users' , 'new']" class="nav-link px-2 text-white">Crear</a></li>
+    <li class="nav-item"><a  class="nav-link px-2 text-white">Filtrar</a></li>
   </ul>
   <p class="text-center  text-white">© 2024 Guada Gutiérrez Torruella</p>
 </footer>

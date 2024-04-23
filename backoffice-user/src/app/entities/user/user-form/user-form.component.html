@@ -3,10 +3,15 @@
   {{ mode }} // {{ userId }}
 
   <form *ngIf="user" #itemForm="ngForm" name="itemForm" role="form" novalidate autocomplete="off">
+    <div class="form-group">
+      <label for="recon">Id</label>
+      <input disbled type="number" [(ngModel)]="user.id" name="id" class="form-control" id="recon" #price="ngModel">
+    </div>
+
     <!-- Nombre -->
     <div class="form-group">
-      <label for="name">Nombre</label>
-      <input type="text" [(ngModel)]="user.nombre" name="name" class="form-control" id="name" #name="ngModel" required minlength="3" maxlength="100">
+      <label for="nombre">Nombre</label>
+      <input type="text" [(ngModel)]="user.nombre" name="nombre" class="form-control" id="name" #name="ngModel" required minlength="3" maxlength="100">
     </div>
     <div *ngIf="(name.dirty && name.errors)">
       <small class="form-text text-danger"
@@ -58,7 +63,9 @@
     </select>
 
     <div class="buttonsForm">
-      <button class= "bg-success text-white" (click)="saveUser()" [disabled]="itemForm.invalid">Guardar</button>
+      <button type="button" class="btn btn-success" (click)="saveUser()" [disabled]="itemForm.invalid">Guardar</button>
+      <!-- TODO: Hacer modal cancelar -->
+      <button type="button" class="btn btn-danger" >Cancelar</button>
     </div>
   </form>
 </div>
