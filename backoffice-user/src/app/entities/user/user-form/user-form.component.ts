@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
-  mode: "NEW" | "UPDATE" = "NEW";
+  mode: "NUEVO" | "ACTUALIZAR" = "NUEVO";
   userId?: number;
   user?: User;
 
@@ -21,19 +21,19 @@ export class UserFormComponent implements OnInit {
     const entryParam: string = this.route.snapshot.paramMap.get("userId") ?? "new";
     if (entryParam !== "new") {
       this.userId = +this.route.snapshot.paramMap.get("itemId")!;
-      this.mode = "UPDATE";
+      this.mode = "ACTUALIZAR";
       this.getUserById(this.userId!);
     } else {
-      this.mode = "NEW";
+      this.mode = "NUEVO";
       this.initializeUser();
     }
   }
 
   public saveUser(): void {
-    if (this.mode === "NEW") {
+    if (this.mode === "NUEVO") {
       this.insertUser();
     }
-    if (this.mode === "UPDATE") {
+    if (this.mode === "ACTUALIZAR") {
       this.updateUser();
     }
   }

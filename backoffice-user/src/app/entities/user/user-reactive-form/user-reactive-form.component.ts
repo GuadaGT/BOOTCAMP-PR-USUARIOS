@@ -10,7 +10,7 @@ import {UserService} from "../service/user.service";
   styleUrls: ['./user-reactive-form.component.scss']
 })
 export class UserReactiveFormComponent implements OnInit {
-  mode: "NEW" | "UPDATE" = "NEW";
+  mode: "NUEVO" | "ACTUALIZAR" = "NUEVO";
   userId?: number;
   user?: User;
 
@@ -27,21 +27,21 @@ export class UserReactiveFormComponent implements OnInit {
     const entryParam: string = this.route.snapshot.paramMap.get("userId") ?? "new";
     if (entryParam !== "new") {
       this.userId = +this.route.snapshot.paramMap.get("userId")!;
-      this.mode = "UPDATE";
+      this.mode = "ACTUALIZAR";
       this.getUserById(this.userId!);
     } else {
-      this.mode = "NEW";
+      this.mode = "NUEVO";
       this.initializeUser();
     }
   }
 
   public saveUser(): void {
     const userToSave: User = this.createFromForm();
-    if (this.mode === "NEW") {
+    if (this.mode === "NUEVO") {
       this.insertUser(userToSave);
     }
 
-    if (this.mode === "UPDATE") {
+    if (this.mode === "ACTUALIZAR") {
       this.updateUser(userToSave);
     }
   }
