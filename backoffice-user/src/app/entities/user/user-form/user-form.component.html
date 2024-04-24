@@ -11,7 +11,7 @@
     <!-- Nombre -->
     <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" [(ngModel)]="user.nombre" name="nombre" class="form-control" id="name" #name="ngModel" required minlength="3" maxlength="100">
+      <input type="text" [(ngModel)]="user.nombre" name="nombre" class="form-control" id="nombre" #name="ngModel" required minlength="3" maxlength="100">
     </div>
     <div *ngIf="(name.dirty && name.errors)">
       <small class="form-text text-danger"

@@ -1,6 +1,5 @@
 package com.kreitek.users.infraestructure.persistence;
 
-import com.kreitek.users.application.dto.UserDto;
 import com.kreitek.users.domain.entity.User;
 import com.kreitek.users.domain.persistence.UserPersistence;
 import com.kreitek.users.infraestructure.specs.UserSpecification;
