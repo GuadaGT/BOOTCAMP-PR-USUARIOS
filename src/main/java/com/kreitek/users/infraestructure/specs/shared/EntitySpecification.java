@@ -17,7 +17,7 @@ public abstract class EntitySpecification<T> {
         //create a new predicate list
         List<Predicate> predicates = new ArrayList<>();
 
-        //add add criteria to predicates
+        // add criteria to predicates
         for (SearchCriteria criteria : this.criteria) {
             if (criteria.getOperation().equals(SearchOperation.GREATER_THAN)) {
                 predicates.add(builder.greaterThan(

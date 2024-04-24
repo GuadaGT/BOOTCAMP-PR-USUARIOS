@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from "../model/user.model";
-import { UserService } from "../service/user.service";
-import { ActivatedRoute } from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {User, UserRole} from "../model/user.model";
+import {UserService} from "../service/user.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-user-list',
@@ -9,9 +9,7 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-
   users: User[] = [];
-
   page: number = 0;
   size: number = 5;
   sort: string = "nombre,asc";
@@ -23,10 +21,15 @@ export class UserListComponent implements OnInit {
   totalElements: number = 0;
 
   nameFilter?: string;
+  lastNameFilter?: string;
+  rolFilter?: UserRole;
+
   userIdToDelete?: number;
 
   constructor(private userService: UserService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+
+  }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -36,8 +39,6 @@ export class UserListComponent implements OnInit {
     if (!this.last) {
       this.page++;
       this.getAllUsers();
-      console.log(this.page);
-      console.log(this.users);
     }
   }
 
@@ -45,8 +46,6 @@ export class UserListComponent implements OnInit {
     if (!this.first) {
       this.page--;
       this.getAllUsers();
-      console.log(this.page);
-      console.log(this.users);
     }
   }
 
@@ -73,7 +72,13 @@ export class UserListComponent implements OnInit {
   private buildFilters(): string | undefined {
     const filters: string[] = [];
     if (this.nameFilter) {
-      filters.push("name:MATCH:" + this.nameFilter);
+      filters.push("nombre:MATCH:" + this.nameFilter);
+    }
+    if (this.lastNameFilter) {
+      filters.push("apellidos:MATCH:" + this.lastNameFilter);
+    }
+    if (this.rolFilter) {
+      filters.push("rol:MATCH:" + this.rolFilter);
     }
     if (filters.length > 0) {
       let globalFilters: string = "";
@@ -117,7 +122,5 @@ export class UserListComponent implements OnInit {
   goToPage(pageNumber: number): void {
     this.page = pageNumber - 1;
     this.getAllUsers();
-    console.log(this.page);
-    console.log(this.users);
   }
 }

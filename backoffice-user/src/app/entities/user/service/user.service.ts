@@ -25,16 +25,17 @@ export class UserService {
     return this.http.delete<any>(deleteUri);
   }
 
+  public getUserById(userId: number): Observable<User> {
+    let userUriById = "http://localhost:8080/user/users/" + userId;
+    return this.http.get<User>(userUriById);
+  }
+
   public insert(user: User): Observable<User> {
     return this.http.post<User>(this.userUri, user);
   }
 
-  public getUserById(userId: number): Observable<User> {
-    const userUriById = `${this.userUri}/${userId}`;
-    return this.http.get<User>(userUriById);
-  }
-
   public update(user: User): Observable<User> {
-    return this.http.patch<User>(this.userUri, user);
+    let uriUpdate = "http://localhost:8080/user/users/" + user.id ;
+    return this.http.patch<User>(uriUpdate, user);
   }
 }

@@ -1,6 +1,6 @@
 <div class="container">
-  <h1>Ficha de artículo</h1>
-  {{ mode }} // {{ userId }}
+  <h1>Ficha de Usuario</h1>
+  {{ mode }}: Usuario {{ userId }}
 
   <form *ngIf="userForm" [formGroup]="userForm" novalidate autocomplete="off">
 
@@ -37,7 +37,7 @@
       </small>
       <small class="form-text text-danger"
              *ngIf="userForm.get('apellidos')!.errors!['minlength']">
-        Este campo tiene que tener una longitud mínima de 3 caracteres
+        Este campo tiene que tener una longitud mínima de 6 caracteres
       </small>
     </div>
 
@@ -53,7 +53,7 @@
       </small>
       <small class="form-text text-danger"
              *ngIf="userForm.get('email')!.errors!['minlength']">
-        Este campo tiene que tener una longitud mínima de 3 caracteres
+        Este campo tiene que tener una longitud mínima de 6 caracteres
       </small>
     </div>
 
@@ -65,8 +65,28 @@
 
     <div class="buttonsForm">
       <button type="button" class="btn btn-success" (click)="saveUser()" [disabled]="userForm.invalid">Guardar</button>
-      <button type="button" class="btn btn-danger" (click)="resetUser()" type="button">Cancelar</button>
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelEditModal">
+        Cancelar
+      </button>
     </div>
-
   </form>
+
+  <div class="modal fade" id="cancelEditModal" tabindex="-1" aria-labelledby="cancelEditModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Cancelar editar usuario</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Desea eliminar los cambios realizados?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continuar</button>
+          <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="resetUser()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+

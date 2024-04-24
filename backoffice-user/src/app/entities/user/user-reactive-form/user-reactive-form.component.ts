@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User, UserRole} from "../model/user.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../service/user.service";
 
 @Component({
@@ -18,7 +18,8 @@ export class UserReactiveFormComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -48,9 +49,9 @@ export class UserReactiveFormComponent implements OnInit {
   private buildForm(): void {
     this.userForm = this.formBuilder.group({
       id: [{value: undefined, disabled: true}],
-      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      apellidos: ['', [Validators.required,Validators.maxLength(2000)]],
-      email: ['', [Validators.required,Validators.maxLength(2000)]],
+      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      apellidos: ['', [Validators.required,Validators.minLength(6),Validators.maxLength(60)]],
+      email: ['', [Validators.required,Validators.minLength(6),Validators.maxLength(60)]],
       rol: [undefined, [Validators.required]]
     })
   }
@@ -64,6 +65,7 @@ export class UserReactiveFormComponent implements OnInit {
       rol: user.rol,
     })
   }
+
   private createFromForm(): User {
     return {
       ...this.user,
@@ -87,6 +89,7 @@ export class UserReactiveFormComponent implements OnInit {
       next: (userInserted) => {
         console.log("Insertado correctamente");
         console.log(userInserted);
+
       },
       error: (err) => {this.handleError(err);}
     })
@@ -96,17 +99,14 @@ export class UserReactiveFormComponent implements OnInit {
       next: (userUpdated) => {
         console.log("Modificado correctamente");
         console.log(userUpdated);
+        this.router.navigate(["/users"]);
       },
       error: (err) => {this.handleError(err);}
     })
   }
 
-  resetUser(): void {
-    if (this.mode === "UPDATE" && this.user) {
-      this.updateForm(this.user);
-    } else {
-      this.initializeUser();
-    }
+  public resetUser(): void {
+      this.router.navigate(["/users"]);
   }
 
   private getUserById(userId: number) {

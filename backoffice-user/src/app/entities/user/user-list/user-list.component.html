@@ -1,45 +1,33 @@
 <div class="container">
-<h1>Gestión usuarios</h1>
-  <!-- TODO: Crear Filtros -->
-<a><i class="fa fa-filter"></i></a>
-  <div>
-<table *ngIf="users.length > 0">
-  <thead>
-  <th>Id</th>
-  <th>Nombre</th>
-  <th>Apellido</th>
-  <th>Email</th>
-  <th>Rol</th>
-  <th>Acción</th>
-  </thead>
-  <tbody>
-  <tr *ngFor="let user of users">
-    <td>{{ user.id }}</td>
-    <td>
-      {{ user.nombre }}
-    </td>
-    <td>
-      {{ user.apellidos }}
-    </td>
-    <td>
-      {{ user.email }}
-    </td>
-    <td>
-      {{ user.rol }}
-    </td>
-    <td>
-      <a [routerLink]="['/users', 'reactive',  user.id ]"><i class="far fa-edit"></i></a>
-      <a (click)="prepareUserToDelete(user.id!)"><i class="fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete" ></i></a>
-    </td>
-  </tr>
-  </tbody>
-</table>
-  </div>
+  <h1>Gestión usuarios</h1>
+
+  <table *ngIf="users.length > 0">
+    <thead>
+    <th>Id</th>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Email</th>
+    <th>Rol</th>
+    <th>Acción</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.nombre }}</td>
+      <td>{{ user.apellidos }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.rol }}</td>
+      <td>
+        <a [routerLink]="['/users', 'reactive',  user.id ]"><i class="far fa-edit"></i></a>
+        <a (click)="prepareUserToDelete(user.id!)"><i class="fas fa-trash-alt" data-bs-toggle="modal" data-bs-target="#askConfirmationDelete"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 
   <div class="btn-create-user">
-    <button type="button" class="btn btn-success"  [routerLink]="['/users' , 'new']">Crear Usuario</button>
+    <button type="button" class="btn btn-success" [routerLink]="['/users', 'new']">Crear Usuario</button>
   </div>
-
 
   <ul class="pagination">
     <li class="page-item">
@@ -57,23 +45,42 @@
     </li>
   </ul>
 
+  <form>
+    <div class="row">
+      <div class="form-group" class="col-12 col-md-6">
+        <label for="name">Nombre</label>
+        <input type="text" [(ngModel)]="nameFilter" name="name" id="name">
+      </div>
+      <div class="form-group" class="col-12 col-md-6">
+        <label for="apellidos">Apellidos</label>
+        <input type="text" [(ngModel)]="lastNameFilter" name="name" id="apellidos">
+      </div>
+      <div class="form-group" class="col-12 col-md-6">
+        <label for="rol">Rol</label>
+        <input type="text" [(ngModel)]="rolFilter" name="name" id="rol">
+      </div>
+      <div>
+        <a (click)="searchByFilters();"><i class="fa fa-filter"></i> Filtrar</a>
+      </div>
+    </div>
+  </form>
 
-<div class="modal fade" id="askConfirmationDelete" tabindex="-1" aria-labelledby="askConfirmationDelete" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar usuario</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ¿Desea eliminar el usuario seleccionado?
-        Una vez realizado no podrá recuperar el registro.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteUser()">Eliminar</button>
+  <div class="modal fade" id="askConfirmationDelete" tabindex="-1" aria-labelledby="askConfirmationDelete" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar usuario</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Desea eliminar el usuario seleccionado?
+          Una vez realizado no podrá recuperar el registro.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="deleteUser()">Eliminar</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>

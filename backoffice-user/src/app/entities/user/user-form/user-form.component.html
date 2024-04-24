@@ -64,8 +64,26 @@
 
     <div class="buttonsForm">
       <button type="button" class="btn btn-success" (click)="saveUser()" [disabled]="itemForm.invalid">Guardar</button>
-      <!-- TODO: Hacer modal cancelar -->
-      <button type="button" class="btn btn-danger" >Cancelar</button>
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelEditModal">
+        Cancelar
+      </button>
     </div>
   </form>
+  <div class="modal fade" id="cancelEditModal" tabindex="-1" aria-labelledby="cancelEditModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Cancelar alta usuario</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Desea eliminar los cambios realizados?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continuar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="resetUser()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

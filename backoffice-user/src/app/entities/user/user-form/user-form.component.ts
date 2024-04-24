@@ -33,20 +33,12 @@ export class UserFormComponent implements OnInit {
     if (this.mode === "NEW") {
       this.insertUser();
     }
-
     if (this.mode === "UPDATE") {
       this.updateUser();
     }
-    }
-
-  public selectRole(event: Event): void {
-    const rol = (event.target as HTMLSelectElement).value;
-    if (this.user) {
-      this.user.rol = rol as UserRole;
-    }
   }
 
-  private insertUser(): void {
+  insertUser() {
     this.userService.insert(this.user!).subscribe({
       next: (itemInserted) => {
         console.log("Insertado correctamente");
@@ -56,7 +48,7 @@ export class UserFormComponent implements OnInit {
       error: (err) => { this.handleError(err); }
     })
   }
-  private updateUser(): void {
+ updateUser() {
     this.userService.update(this.user!).subscribe({
       next: (userUpdated) => {
         console.log("Modificado correctamente");
@@ -75,6 +67,17 @@ export class UserFormComponent implements OnInit {
     })
   }
 
+  public selectRole(event: Event): void {
+    const rol = (event.target as HTMLSelectElement).value;
+    if (this.user) {
+      this.user.rol = rol as UserRole;
+    }
+  }
+
+  public resetUser(): void {
+    this.router.navigate(["/users"])
+  }
+
   private initializeUser(): void {
     this.user = new User(undefined, "", "", "", UserRole.ADMINISTRADOR);
   }
@@ -82,6 +85,4 @@ export class UserFormComponent implements OnInit {
   private handleError(error: any): void {
     console.log(error);
   }
-
-
 }

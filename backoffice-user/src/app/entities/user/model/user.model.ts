@@ -10,7 +10,6 @@ export class User {
   email: string;
   rol: UserRole;
 
-
   constructor(id: number | undefined, nombre: string, apellidos: string, email: string, rol: UserRole) {
     this.id = id;
     this.nombre = nombre;
@@ -19,4 +18,5 @@ export class User {
     this.rol = rol;
   }
 }
+
 
