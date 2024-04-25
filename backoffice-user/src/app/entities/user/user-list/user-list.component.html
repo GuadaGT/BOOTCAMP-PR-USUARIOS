@@ -19,10 +19,9 @@
           </div>
         </div>
 
-        <select class="form-select" aria-label="Selecciona un rol" formControlName="rol">
-          <option selected disabled>Selecciona un rol</option>
-          <option value="ADMINISTRADOR">ADMINISTRADOR</option>
-          <option value="CONTRIBUTOR">CONTRIBUTOR</option>
+        <label for="rol">Rol</label>
+        <select class="form-select" [(ngModel)]="rolFilter" name="rol" id="rol">
+          <option [ngValue]="rol" *ngFor="let rol of roles">{{rol}}</option>
         </select>
 
         <button type="button" class="btn btn-primary" (click)="searchByFilters()">Filtrar</button>

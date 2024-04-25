@@ -52,18 +52,19 @@
             <!-- Email -->
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" [(ngModel)]="user.email" name="email" class="form-control" id="email" #email="ngModel" required minlength="3" maxlength="30">
+              <input type="email" [(ngModel)]="user.email" name="email" class="form-control" id="email" #email="ngModel" required minlength="3" maxlength="60">
             </div>
             <!-- Validación Email -->
             <div *ngIf="(email.dirty && email.errors)">
               <small class="form-text text-danger" *ngIf="email.errors['required']">
                 El email es obligatorio
               </small>
+
               <small class="form-text text-danger" *ngIf="email.errors['minlength']">
                 El email deben tener al menos 3 caracteres
               </small>
               <small class="form-text text-danger" *ngIf="email.errors['maxlength']">
-                El email no puede tener más de 30 caracteres
+                El email no puede tener más de 60 caracteres
               </small>
             </div>
 

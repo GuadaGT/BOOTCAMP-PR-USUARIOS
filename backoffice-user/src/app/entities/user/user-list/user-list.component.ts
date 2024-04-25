@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User, RolType } from "../model/user.model";
 import { UserService } from "../service/user.service";
 import { ActivatedRoute } from "@angular/router";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-user-list',
@@ -19,7 +20,7 @@ export class UserListComponent implements OnInit {
   totalElements: number = 0;
   nameFilter?: string;
   lastNameFilter?: string;
-  roles: RolType[] = [];
+  roles: RolType[] = Object.values(RolType);
   rolFilter?: RolType[] = [];
   userIdToDelete?: number;
   showFilterForm: boolean = false;
@@ -75,7 +76,7 @@ export class UserListComponent implements OnInit {
       filters.push("apellidos:MATCH:" + this.lastNameFilter);
     }
     if (this.rolFilter) {
-      filters.push("rol:EQUALS:" + this.rolFilter);
+      filters.push("rol:MATCH:" + this.rolFilter);
     }
 
     if (filters.length > 0) {

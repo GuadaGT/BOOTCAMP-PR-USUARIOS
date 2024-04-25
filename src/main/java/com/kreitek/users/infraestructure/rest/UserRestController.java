@@ -23,28 +23,28 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @CrossOrigin
+
     @GetMapping(value = "/users-all", produces = "application/json")
     ResponseEntity<List<UserDto>> getAllUsers() {
         List<UserDto> users = this.userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @CrossOrigin
+
     @GetMapping(value = "/users", produces = "application/json")
     public ResponseEntity<Page<UserDto>> getUsersByCriteriaPaged(@RequestParam(value = "filter", required = false) String filter, Pageable pageable) {
         Page<UserDto> users = this.userService.getUsersByCriteriaStringPage(pageable, filter);
         return new ResponseEntity<Page<UserDto>>(users, HttpStatus.OK);
     }
 
-    @CrossOrigin
+
     @GetMapping(value = "/users/rol", produces = "application/json")
     ResponseEntity<List<RolType>> getAllRols() {
         List<RolType> rol = this.userService.getAllRols();
         return new ResponseEntity<>(rol, HttpStatus.OK);
     }
 
-    @CrossOrigin
+
     @GetMapping(value = "/users/{userId}")
     ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
         Optional<UserDto> user = this.userService.getUserById(userId);
@@ -56,14 +56,14 @@ public class UserRestController {
         }
     }
 
-    @CrossOrigin
+
     @PostMapping(value = "/users", produces = "application/json", consumes = "application/json")
     ResponseEntity<UserDto> insertUser(@RequestBody UserDto userDto) {
         UserDto userSaved = this.userService.saveUser(userDto);
         return new ResponseEntity<>(userSaved, HttpStatus.CREATED);
     }
 
-    @CrossOrigin
+
     @PatchMapping(value = "/users/{userId}", produces = "application/json", consumes = "application/json")
     ResponseEntity<UserDto> updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
         Optional<UserDto> userUpdate = this.userService.updateUser(userId, userDto);
@@ -74,7 +74,7 @@ public class UserRestController {
         }
     }
 
-    @CrossOrigin
+
     @DeleteMapping(value = "/users/{userId}")
     ResponseEntity<?> deleteUserById(@PathVariable Long userId) {
         this.userService.deleteUser(userId);
