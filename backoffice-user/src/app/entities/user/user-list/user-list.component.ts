@@ -132,7 +132,7 @@ export class UserListComponent implements OnInit {
     this.getAllUsers();
   }
 
-  toggleFilterForm(): void {
+  filterForm(): void {
     this.showFilterForm = !this.showFilterForm;
   }
 }
