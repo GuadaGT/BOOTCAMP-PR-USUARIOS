@@ -12,6 +12,8 @@ export class UserFormComponent implements OnInit {
   mode: "NUEVO" | "ACTUALIZAR" = "NUEVO";
   userId?: number;
   user?: User;
+  roles: UserRole[] = [UserRole.ADMINISTRADOR, UserRole.CONTRIBUTOR];
+  selectedRole: UserRole = UserRole.ADMINISTRADOR;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
@@ -20,7 +22,7 @@ export class UserFormComponent implements OnInit {
   ngOnInit(): void {
     const entryParam: string = this.route.snapshot.paramMap.get("userId") ?? "new";
     if (entryParam !== "new") {
-      this.userId = +this.route.snapshot.paramMap.get("itemId")!;
+      this.userId = +this.route.snapshot.paramMap.get("userId")!;
       this.mode = "ACTUALIZAR";
       this.getUserById(this.userId!);
     } else {
@@ -40,15 +42,16 @@ export class UserFormComponent implements OnInit {
 
   insertUser() {
     this.userService.insert(this.user!).subscribe({
-      next: (itemInserted) => {
+      next: (userInserted) => {
         console.log("Insertado correctamente");
-        console.log(itemInserted);
+        console.log(userInserted);
         this.router.navigate(["/users"]);
       },
       error: (err) => { this.handleError(err); }
     })
   }
  updateUser() {
+   console.log("Datos a enviar al servidor:", this.user);
     this.userService.update(this.user!).subscribe({
       next: (userUpdated) => {
         console.log("Modificado correctamente");
@@ -62,6 +65,7 @@ export class UserFormComponent implements OnInit {
     this.userService.getUserById(userId).subscribe({
       next: (userRequest) => {
         this.user = userRequest;
+        this.selectedRole = userRequest.rol;
       },
       error: (err) => {this.handleError(err);}
     })

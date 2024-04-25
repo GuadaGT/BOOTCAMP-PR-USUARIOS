@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  div {
+    &:first-child {
+      flex-grow: 1;
+      max-width: 50%;
+    }
+    &:last-child {
+      flex-grow: 1;
+      max-width: 50%;
+      transition: transform 0.3s ease-in-out;
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease-in-out;
+        transform: scale(0.8);
+        &:hover {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}

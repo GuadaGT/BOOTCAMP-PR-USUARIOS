@@ -15,6 +15,8 @@ export class UserReactiveFormComponent implements OnInit {
   user?: User;
 
   userForm?: FormGroup;
+  roles: UserRole[] = [UserRole.ADMINISTRADOR, UserRole.CONTRIBUTOR];
+  selectedRole: UserRole = UserRole.ADMINISTRADOR;
 
   constructor(private route: ActivatedRoute,
               private userService: UserService,
@@ -98,7 +100,7 @@ export class UserReactiveFormComponent implements OnInit {
     this.userService.update(userToSave).subscribe({
       next: (userUpdated) => {
         console.log("Modificado correctamente");
-        console.log(userUpdated);
+
         this.router.navigate(["/users"]);
       },
       error: (err) => {this.handleError(err);}

@@ -22,7 +22,8 @@ export class UserListComponent implements OnInit {
 
   nameFilter?: string;
   lastNameFilter?: string;
-  rolFilter?: UserRole;
+  roles: UserRole[] = [UserRole.ADMINISTRADOR, UserRole.CONTRIBUTOR];
+
 
   userIdToDelete?: number;
 
@@ -77,9 +78,8 @@ export class UserListComponent implements OnInit {
     if (this.lastNameFilter) {
       filters.push("apellidos:MATCH:" + this.lastNameFilter);
     }
-    if (this.rolFilter) {
-      filters.push("rol:MATCH:" + this.rolFilter);
-    }
+
+
     if (filters.length > 0) {
       let globalFilters: string = "";
       for (let filter of filters) {

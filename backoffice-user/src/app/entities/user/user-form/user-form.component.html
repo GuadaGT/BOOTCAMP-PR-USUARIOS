@@ -1,69 +1,79 @@
 <div class="container">
-  <h1>Ficha de Usuario</h1>
-  {{ mode }} Usuario
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title">Formulario de Usuario</h1>
+          <form *ngIf="user" #userForm="ngForm" name="itemForm" role="form" novalidate autocomplete="off">
+            <!-- Nombre -->
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" [(ngModel)]="user.nombre" name="nombre" class="form-control" id="nombre" #name="ngModel" required minlength="3" maxlength="100">
+              <div *ngIf="(name.dirty && name.errors)">
+                <small class="form-text text-danger" *ngIf="name.errors['required']">
+                  Este campo es requerido
+                </small>
+                <small class="form-text text-danger" *ngIf="name.errors['minlength']">
+                  Este campo tiene que tener una longitud mínima de 3 caracteres
+                </small>
+              </div>
+            </div>
 
-  <form *ngIf="user" #itemForm="ngForm" name="itemForm" role="form" novalidate autocomplete="off">
-    <!-- Nombre -->
-    <div class="form-group">
-      <label for="nombre">Nombre</label>
-      <input type="text" [(ngModel)]="user.nombre" name="nombre" class="form-control" id="nombre" #name="ngModel" required minlength="3" maxlength="100">
-    </div>
-    <div *ngIf="(name.dirty && name.errors)">
-      <small class="form-text text-danger"
-             *ngIf="name.errors['required']">
-        Este campo es requerido
-      </small>
-      <small class="form-text text-danger"
-             *ngIf="name.errors['minlength']">
-        Este campo tiene que tener una longitud mínima de 3 caracteres
-      </small>
+            <!-- Apellidos -->
+            <div class="form-group">
+              <label for="apellidos">Apellidos</label>
+              <input type="text" [(ngModel)]="user.apellidos" name="apellidos" class="form-control" id="apellidos" #name="ngModel" required minlength="3" maxlength="100">
+              <div *ngIf="(name.dirty && name.errors)">
+                <small class="form-text text-danger" *ngIf="name.errors['required']">
+                  Este campo es requerido
+                </small>
+                <small class="form-text text-danger" *ngIf="name.errors['minlength']">
+                  Este campo tiene que tener una longitud mínima de 3 caracteres
+                </small>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" [(ngModel)]="user.email" name="email" class="form-control" id="email" #name="ngModel" required email>
+              <div *ngIf="(name.dirty && name.errors)">
+                <small class="form-text text-danger" *ngIf="name.errors['required']">
+                  Este campo es requerido
+                </small>
+                <small class="form-text text-danger" *ngIf="name.errors['email']">
+                  Por favor, ingresa un correo electrónico válido.
+                </small>
+              </div>
+            </div>
+
+            <select class="form-select mb-3" aria-label="Selecciona un rol" [(ngModel)]="selectedRole">
+              <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+            </select>
+
+            <div class="buttonsForm d-flex justify-content-center mt-3">
+              <button type="button" class="btn btn-success me-2" (click)="saveUser()" [disabled]="userForm.invalid">Guardar</button>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelEditModal">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
-    <!-- Apellidos -->
-    <div class="form-group">
-      <label for="apellidos">Apellidos</label>
-      <input type="text" [(ngModel)]="user.apellidos" name="apellidos" class="form-control" id="apellidos" #name="ngModel" required minlength="3" maxlength="100">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title">Datos del usuario</h1>
+          <div *ngIf="user">
+            <p><strong>Nombre:</strong> {{ user.nombre }}</p>
+            <p><strong>Apellidos:</strong> {{ user.apellidos }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Rol:</strong> {{ user.rol }}</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div *ngIf="(name.dirty && name.errors)">
-      <small class="form-text text-danger"
-             *ngIf="name.errors['required']">
-        Este campo es requerido
-      </small>
-      <small class="form-text text-danger"
-             *ngIf="name.errors['minlength']">
-        Este campo tiene que tener una longitud mínima de 6 caracteres
-      </small>
-    </div>
-
-    <!-- Email -->
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="text" [(ngModel)]="user.email" name="apellidos" class="form-control" id="email" #name="ngModel" required minlength="3" maxlength="100">
-    </div>
-    <div *ngIf="(name.dirty && name.errors)">
-      <small class="form-text text-danger"
-             *ngIf="name.errors['required']">
-        Este campo es requerido
-      </small>
-      <small class="form-text text-danger"
-             *ngIf="name.errors['minlength']">
-        Este campo tiene que tener una longitud mínima de 6 caracteres
-      </small>
-    </div>
-
-    <select class="form-select" aria-label="Selecciona un rol" (change)="selectRole($event)">
-      <option selected disabled>Selecciona un rol</option>
-      <option value="ADMINISTRADOR">ADMINISTRADOR</option>
-      <option value="CONTRIBUTOR">CONTRIBUTOR</option>
-    </select>
-
-    <div class="buttonsForm">
-      <button type="button" class="btn btn-success" (click)="saveUser()" [disabled]="itemForm.invalid">Guardar</button>
-      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelEditModal">
-        Cancelar
-      </button>
-    </div>
-  </form>
+  </div>
   <div class="modal fade" id="cancelEditModal" tabindex="-1" aria-labelledby="cancelEditModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -75,8 +85,8 @@
           ¿Desea eliminar los cambios realizados?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continuar</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="resetUser()">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Continuar</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="resetUser()">Cancelar</button>
         </div>
       </div>
     </div>
