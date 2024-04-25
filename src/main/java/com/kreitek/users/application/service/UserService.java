@@ -1,6 +1,7 @@
 package com.kreitek.users.application.service;
 
 import com.kreitek.users.application.dto.UserDto;
+import com.kreitek.users.domain.type.RolType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,5 +15,5 @@ public interface UserService {
     Optional<UserDto> updateUser(Long userId, UserDto userDto);
     void deleteUser(Long userId);
     Page<UserDto> getUsersByCriteriaStringPage(Pageable pageable, String filter);
-
+    List<RolType> getAllRols();
 }

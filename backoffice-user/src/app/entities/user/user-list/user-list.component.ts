@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {User, UserRole} from "../model/user.model";
-import {UserService} from "../service/user.service";
-import {ActivatedRoute} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { User, RolType } from "../model/user.model";
+import { UserService } from "../service/user.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-user-list',
@@ -13,60 +13,56 @@ export class UserListComponent implements OnInit {
   page: number = 0;
   size: number = 5;
   sort: string = "nombre,asc";
-
   first: boolean = true;
   last: boolean = true;
-
   totalPages: number = 0;
   totalElements: number = 0;
-
   nameFilter?: string;
   lastNameFilter?: string;
-  roles: UserRole[] = [UserRole.ADMINISTRADOR, UserRole.CONTRIBUTOR];
-
-
+  roles: RolType[] = [];
+  rolFilter?: RolType[] = [];
   userIdToDelete?: number;
+  showFilterForm: boolean = false;
 
-  constructor(private userService: UserService,
-              private route: ActivatedRoute) {
-
-  }
+  constructor(private userService: UserService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.getAllUsers();
   }
 
-  public nextPage(): void {
+  nextPage(): void {
     if (!this.last) {
       this.page++;
       this.getAllUsers();
     }
   }
 
-  public previousPage(): void {
+  previousPage(): void {
     if (!this.first) {
       this.page--;
       this.getAllUsers();
     }
   }
 
-  public searchByFilters(): void {
+  searchByFilters(): void {
     this.page = 0;
     this.getAllUsers();
   }
 
-  public prepareUserToDelete(userId: number): void {
+  prepareUserToDelete(userId: number): void {
     this.userIdToDelete = userId;
   }
 
-  public deleteUser(): void {
+  deleteUser(): void {
     if (this.userIdToDelete) {
       this.userService.deleteUser(this.userIdToDelete).subscribe({
         next: (userRequest) => {
           this.getAllUsers();
         },
-        error: (err) => { this.handleError(err); }
-      })
+        error: (err) => {
+          this.handleError(err);
+        },
+      });
     }
   }
 
@@ -78,7 +74,9 @@ export class UserListComponent implements OnInit {
     if (this.lastNameFilter) {
       filters.push("apellidos:MATCH:" + this.lastNameFilter);
     }
-
+    if (this.rolFilter) {
+      filters.push("rol:EQUALS:" + this.rolFilter);
+    }
 
     if (filters.length > 0) {
       let globalFilters: string = "";
@@ -103,8 +101,10 @@ export class UserListComponent implements OnInit {
         this.totalPages = data.totalPages;
         this.totalElements = data.totalElements;
       },
-      error: (err) => { this.handleError(err); }
-    })
+      error: (err) => {
+        this.handleError(err);
+      },
+    });
   }
 
   private handleError(error: any): void {
@@ -122,5 +122,9 @@ export class UserListComponent implements OnInit {
   goToPage(pageNumber: number): void {
     this.page = pageNumber - 1;
     this.getAllUsers();
+  }
+
+  toggleFilterForm(): void {
+    this.showFilterForm = !this.showFilterForm;
   }
 }

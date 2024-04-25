@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home.component";
 import {UserListComponent} from "./entities/user/user-list/user-list.component";
 import {UserFormComponent} from "./entities/user/user-form/user-form.component";
-import {UserReactiveFormComponent} from "./entities/user/user-reactive-form/user-reactive-form.component";
 
 const routes: Routes = [
   {
@@ -18,10 +17,6 @@ const routes: Routes = [
   {
     path: 'users/:userId',
     component: UserFormComponent,
-  },
-  {
-    path: 'users/reactive/:userId',
-    component: UserReactiveFormComponent,
   },
 ];
 

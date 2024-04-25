@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {User} from "../model/user.model";
+import {RolType, User} from "../model/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +37,10 @@ export class UserService {
   public update(user: User): Observable<User> {
     let uriUpdate = "http://localhost:8080/user/users/" + user.id ;
     return this.http.patch<User>(uriUpdate, user);
+  }
+
+  public getRol(): Observable<RolType[]> {
+    let urlRol = "http://localhost:8080/user/users/rol";
+    return this.http.get<RolType[]>(urlRol);
   }
 }

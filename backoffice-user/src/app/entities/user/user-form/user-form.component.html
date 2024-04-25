@@ -3,56 +3,80 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
-          <h1 class="card-title">Formulario de Usuario</h1>
+          <h1>Ficha de Usuario</h1>
+          {{ mode }}: Usuario {{ userId }}
+
           <form *ngIf="user" #userForm="ngForm" name="itemForm" role="form" novalidate autocomplete="off">
+            <!-- Id: solo visible si estamos en edición (pero no será editable) -->
+            <div class="form-group" *ngIf="mode === 'EDIT'">
+              <label for="id">Id</label>
+              <input disabled type="number" [(ngModel)]="user.id" name="id" class="form-control" id="id" #id="ngModel"  readonly>
+            </div>
+
             <!-- Nombre -->
             <div class="form-group">
               <label for="nombre">Nombre</label>
-              <input type="text" [(ngModel)]="user.nombre" name="nombre" class="form-control" id="nombre" #name="ngModel" required minlength="3" maxlength="100">
-              <div *ngIf="(name.dirty && name.errors)">
-                <small class="form-text text-danger" *ngIf="name.errors['required']">
-                  Este campo es requerido
-                </small>
-                <small class="form-text text-danger" *ngIf="name.errors['minlength']">
-                  Este campo tiene que tener una longitud mínima de 3 caracteres
-                </small>
-              </div>
+              <input type="text" [(ngModel)]="user.nombre" name="nombre" class="form-control" id="nombre" #nombre="ngModel" required minlength="3" maxlength="30">
+            </div>
+            <!-- Validación Nombre -->
+            <div *ngIf="(nombre.dirty && nombre.errors)">
+              <small class="form-text text-danger" *ngIf="nombre.errors['required']">
+                El nombre es obligatorio
+              </small>
+              <small class="form-text text-danger" *ngIf="nombre.errors['minlength']">
+                El nombre debe tener al menos 3 caracteres
+              </small>
+              <small class="form-text text-danger" *ngIf="nombre.errors['maxlength']">
+                El nombre no puede tener más de 30 caracteres
+              </small>
             </div>
 
             <!-- Apellidos -->
             <div class="form-group">
               <label for="apellidos">Apellidos</label>
-              <input type="text" [(ngModel)]="user.apellidos" name="apellidos" class="form-control" id="apellidos" #name="ngModel" required minlength="3" maxlength="100">
-              <div *ngIf="(name.dirty && name.errors)">
-                <small class="form-text text-danger" *ngIf="name.errors['required']">
-                  Este campo es requerido
-                </small>
-                <small class="form-text text-danger" *ngIf="name.errors['minlength']">
-                  Este campo tiene que tener una longitud mínima de 3 caracteres
-                </small>
-              </div>
+              <input type="text" [(ngModel)]="user.apellidos" name="apellidos" class="form-control" id="apellidos" #apellidos="ngModel" required minlength="3" maxlength="60">
+            </div>
+            <!-- Validación Apellidos -->
+            <div *ngIf="(apellidos.dirty && apellidos.errors)">
+              <small class="form-text text-danger" *ngIf="apellidos.errors['required']">
+                Los apellidos son obligatorios
+              </small>
+              <small class="form-text text-danger" *ngIf="apellidos.errors['minlength']">
+                Los apellidos deben tener al menos 3 caracteres
+              </small>
+              <small class="form-text text-danger" *ngIf="apellidos.errors['maxlength']">
+                Los apellidos no pueden tener más de 60 caracteres
+              </small>
             </div>
 
             <!-- Email -->
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="text" [(ngModel)]="user.email" name="email" class="form-control" id="email" #name="ngModel" required email>
-              <div *ngIf="(name.dirty && name.errors)">
-                <small class="form-text text-danger" *ngIf="name.errors['required']">
-                  Este campo es requerido
-                </small>
-                <small class="form-text text-danger" *ngIf="name.errors['email']">
-                  Por favor, ingresa un correo electrónico válido.
-                </small>
-              </div>
+              <input type="email" [(ngModel)]="user.email" name="email" class="form-control" id="email" #email="ngModel" required minlength="3" maxlength="30">
+            </div>
+            <!-- Validación Email -->
+            <div *ngIf="(email.dirty && email.errors)">
+              <small class="form-text text-danger" *ngIf="email.errors['required']">
+                El email es obligatorio
+              </small>
+              <small class="form-text text-danger" *ngIf="email.errors['minlength']">
+                El email deben tener al menos 3 caracteres
+              </small>
+              <small class="form-text text-danger" *ngIf="email.errors['maxlength']">
+                El email no puede tener más de 30 caracteres
+              </small>
             </div>
 
-            <select class="form-select mb-3" aria-label="Selecciona un rol" [(ngModel)]="selectedRole">
-              <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
-            </select>
+            <div class="form-group">
+              <label for="rol">Rol</label>
+                <select [(ngModel)]="user.rol" name="rol" id="rol" #rol="ngModel" required class="form-select mb-3" aria-label="Selecciona un rol" >
+                  <option *ngFor="let rol of roles" [ngValue]="rol">{{ rol }}</option>
+                </select>
+            </div>
+
 
             <div class="buttonsForm d-flex justify-content-center mt-3">
-              <button type="button" class="btn btn-success me-2" (click)="saveUser()" [disabled]="userForm.invalid">Guardar</button>
+              <button type="button" class="btn btn-success me-2" (click)="saveUser()" [disabled]="userForm.disabled">Guardar</button>
               <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelEditModal">Cancelar</button>
             </div>
           </form>
@@ -63,7 +87,7 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-body">
-          <h1 class="card-title">Datos del usuario</h1>
+          <h1 class="card-title">Datos actuales del Usuario</h1>
           <div *ngIf="user">
             <p><strong>Nombre:</strong> {{ user.nombre }}</p>
             <p><strong>Apellidos:</strong> {{ user.apellidos }}</p>
@@ -74,11 +98,12 @@
       </div>
     </div>
   </div>
+
   <div class="modal fade" id="cancelEditModal" tabindex="-1" aria-labelledby="cancelEditModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Cancelar alta usuario</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Cancelar editar usuario</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -86,9 +111,10 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Continuar</button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="resetUser()">Cancelar</button>
+          <button type="button" class="btn btn-danger"  data-bs-dismiss="modal" (click)="resetUser()">Cancelar</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+

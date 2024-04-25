@@ -1,4 +1,4 @@
-export enum UserRole {
+export enum RolType {
   ADMINISTRADOR = 'ADMINISTRADOR',
   CONTRIBUTOR = 'CONTRIBUTOR',
 }
@@ -8,9 +8,9 @@ export class User {
   nombre: string;
   apellidos: string;
   email: string;
-  rol: UserRole;
+  rol: RolType;
 
-  constructor(id: number | undefined, nombre: string, apellidos: string, email: string, rol: UserRole) {
+  constructor(id: number | undefined, nombre: string, apellidos: string, email: string, rol: RolType) {
     this.id = id;
     this.nombre = nombre;
     this.apellidos = apellidos;

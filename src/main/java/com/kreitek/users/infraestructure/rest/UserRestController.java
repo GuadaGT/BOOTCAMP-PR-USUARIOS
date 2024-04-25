@@ -2,6 +2,7 @@ package com.kreitek.users.infraestructure.rest;
 
 import com.kreitek.users.application.dto.UserDto;
 import com.kreitek.users.application.service.UserService;
+import com.kreitek.users.domain.type.RolType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +35,13 @@ public class UserRestController {
     public ResponseEntity<Page<UserDto>> getUsersByCriteriaPaged(@RequestParam(value = "filter", required = false) String filter, Pageable pageable) {
         Page<UserDto> users = this.userService.getUsersByCriteriaStringPage(pageable, filter);
         return new ResponseEntity<Page<UserDto>>(users, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/users/rol", produces = "application/json")
+    ResponseEntity<List<RolType>> getAllRols() {
+        List<RolType> rol = this.userService.getAllRols();
+        return new ResponseEntity<>(rol, HttpStatus.OK);
     }
 
     @CrossOrigin

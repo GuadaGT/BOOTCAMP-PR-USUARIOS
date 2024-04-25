@@ -12,7 +12,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule, HttpRequest} from "@angular/common/
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UserReactiveFormComponent } from './entities/user/user-reactive-form/user-reactive-form.component';
 import {HttpRequestIntercept} from "./config/interceptors/http-request-interceptor.inteceptor";
 import {NgOptimizedImage} from "@angular/common";
 
@@ -24,7 +23,6 @@ import {NgOptimizedImage} from "@angular/common";
     FooterComponent,
     UserListComponent,
     UserFormComponent,
-    UserReactiveFormComponent,
   ],
     imports: [
         BrowserModule,

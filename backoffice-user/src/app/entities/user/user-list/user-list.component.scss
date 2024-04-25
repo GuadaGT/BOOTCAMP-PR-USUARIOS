@@ -3,21 +3,24 @@ body, html {
   padding: 0;
   width: 100%;
 }
-.h1{
-  margin-top: 10%;
+
+h1 {
+  margin-top: 30px;
+}
+
+.text-center {
+  text-align: center;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-
 }
 
-th, td{
+th, td {
   padding: 8px;
   text-align: center;
 }
-
 
 td a {
   margin-right: 20px;
@@ -25,9 +28,10 @@ td a {
   font-size: 25px;
 }
 
-.fa-filter{
+.fa-filter {
   cursor: pointer;
 }
+
 .fa-edit {
   color: blue;
 }
@@ -53,4 +57,19 @@ td a {
   display: flex;
   justify-content: center;
   padding: 10px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.card {
+  margin-top: 20px;
+  border: 1px solid darkgrey;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 20px;
 }
