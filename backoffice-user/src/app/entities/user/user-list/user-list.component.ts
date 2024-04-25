@@ -12,7 +12,7 @@ import {Observable} from "rxjs";
 export class UserListComponent implements OnInit {
   users: User[] = [];
   page: number = 0;
-  size: number = 5;
+  size: number = 7;
   sort: string = "nombre,asc";
   first: boolean = true;
   last: boolean = true;
@@ -45,9 +45,16 @@ export class UserListComponent implements OnInit {
     }
   }
 
-  searchByFilters(): void {
+  aplicarFiltro(): void {
     this.page = 0;
     this.getAllUsers();
+  }
+
+  borrarFiltro(): void {
+    this.nameFilter = '';
+    this.lastNameFilter = '';
+    this.rolFilter = [];
+    this.aplicarFiltro();
   }
 
   prepareUserToDelete(userId: number): void {

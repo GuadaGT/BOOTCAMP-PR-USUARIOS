@@ -71,5 +71,13 @@ td a {
 }
 
 .card-body {
-  padding: 20px;
+
+  display: flex;
+}
+
+.button-container {
+  margin-top: 20px;
+  .btn-danger{
+    margin-left: 20px;
+  }
 }

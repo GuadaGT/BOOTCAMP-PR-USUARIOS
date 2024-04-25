@@ -9,22 +9,31 @@
     <div class="card-body">
       <form class="filter">
         <div class="row">
-          <div class="form-group" class="col-12 col-md-6">
-            <label for="name">Nombre</label>
-            <input type="text" [(ngModel)]="nameFilter" name="name" id="name">
+          <div class="col-12 col-md-4">
+            <div class="form-group">
+              <label for="name">Nombre</label>
+              <input type="text" [(ngModel)]="nameFilter" name="name" id="name" class="form-control">
+            </div>
           </div>
-          <div class="form-group" class="col-12 col-md-6">
-            <label for="apellidos">Apellidos</label>
-            <input type="text" [(ngModel)]="lastNameFilter" name="name" id="apellidos">
+          <div class="col-12 col-md-4">
+            <div class="form-group">
+              <label for="apellidos">Apellidos</label>
+              <input type="text" [(ngModel)]="lastNameFilter" name="apellidos" id="apellidos" class="form-control">
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="form-group">
+              <label for="rol">Rol</label>
+              <select class="form-select" [(ngModel)]="rolFilter" name="rol" id="rol">
+                <option [ngValue]="rol" *ngFor="let rol of roles">{{rol}}</option>
+              </select>
+          </div>
           </div>
         </div>
-
-        <label for="rol">Rol</label>
-        <select class="form-select" [(ngModel)]="rolFilter" name="rol" id="rol">
-          <option [ngValue]="rol" *ngFor="let rol of roles">{{rol}}</option>
-        </select>
-
-        <button type="button" class="btn btn-primary" (click)="searchByFilters()">Filtrar</button>
+        <div class="button-container">
+        <button type="button" class="btn btn-primary" (click)="aplicarFiltro()">Filtrar</button>
+        <button type="button" class="btn btn-danger" (click)="borrarFiltro()">Borrar filtros</button>
+        </div>
       </form>
     </div>
   </div>
