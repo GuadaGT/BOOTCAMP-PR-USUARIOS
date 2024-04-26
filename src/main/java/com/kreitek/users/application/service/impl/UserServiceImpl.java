@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<UserDto> getUsersByCriteriaStringPage(Pageable pageable, String filter) {
-        Sort sort = Sort.by(Sort.Direction.ASC, "nombre");
+        Sort sort = Sort.by(Sort.Direction.ASC, "nombre" );
         pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
         Page<User> userPage = this.persistence.findAll(pageable,filter);
         return userPage.map(mapper::toDto);
