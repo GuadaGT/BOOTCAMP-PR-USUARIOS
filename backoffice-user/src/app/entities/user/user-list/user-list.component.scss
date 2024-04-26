@@ -137,3 +137,23 @@ table {
     }
   }
 }
+
+
+.btn-success {
+  background-color: forestgreen;
+  &:hover{
+    background-color: mediumseagreen;
+    border-color: mediumseagreen;
+    color: black;
+    font-weight: bold;
+  }
+}
+
+.btn-danger{
+  margin-left: 20px;
+  &:hover {
+    background-color: darkred;
+    border-color:darkred;
+    font-weight: bold;
+  }
+}
