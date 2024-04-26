@@ -22,8 +22,9 @@ export class UserListComponent implements OnInit {
   lastNameFilter?: string;
   roles: RolType[] = Object.values(RolType);
   rolFilter?: RolType[] = [];
-  userIdToDelete?: number;
-  showFilterForm: boolean = false;
+  borrarUsuario?: number;
+  mostrarFiltro: boolean = false;
+  noEncontrado: boolean = false;
 
   constructor(private userService: UserService, private route: ActivatedRoute) {}
 
@@ -58,12 +59,12 @@ export class UserListComponent implements OnInit {
   }
 
   prepareUserToDelete(userId: number): void {
-    this.userIdToDelete = userId;
+    this.borrarUsuario = userId;
   }
 
   deleteUser(): void {
-    if (this.userIdToDelete) {
-      this.userService.deleteUser(this.userIdToDelete).subscribe({
+    if (this.borrarUsuario) {
+      this.userService.deleteUser(this.borrarUsuario).subscribe({
         next: (userRequest) => {
           this.getAllUsers();
         },
@@ -108,6 +109,7 @@ export class UserListComponent implements OnInit {
         this.last = data.last;
         this.totalPages = data.totalPages;
         this.totalElements = data.totalElements;
+        this.noEncontrado = this.users.length === 0;
       },
       error: (err) => {
         this.handleError(err);
@@ -132,7 +134,7 @@ export class UserListComponent implements OnInit {
     this.getAllUsers();
   }
 
-  filterForm(): void {
-    this.showFilterForm = !this.showFilterForm;
+  filtro(): void {
+    this.mostrarFiltro = !this.mostrarFiltro;
   }
 }

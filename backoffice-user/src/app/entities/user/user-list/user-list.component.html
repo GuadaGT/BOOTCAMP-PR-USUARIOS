@@ -1,11 +1,11 @@
 <div class="container">
   <h1 class="text-center mt-3">Gestión usuarios</h1>
 
-  <div class="filter" (click)="filterForm()">
+  <div class="filter" (click)="filtro()">
     <i class="fa fa-filter"></i><strong>Filtrar</strong>
   </div>
 
-  <div class="card" [ngClass]="{ 'hidden': !showFilterForm }">
+  <div class="card" [ngClass]="{ 'hidden': !mostrarFiltro }">
     <div class="card-body">
       <form class="filter">
         <div class="row">
@@ -61,6 +61,10 @@
     </tr>
     </tbody>
   </table>
+
+  <div *ngIf="noEncontrado" class="alert alert-danger" role="alert">
+    <i class="fas fa-question"></i> No se encuentran usuarios con estas características.
+  </div>
 
   <div class="btn-new">
     <button type="button" class="btn btn-success" [routerLink]="['/users', 'new']">Crear Usuario</button>
