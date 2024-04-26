@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="button-container">
-        <button type="button" class="btn btn-primary" (click)="aplicarFiltro()">Filtrar</button>
+        <button type="button" class="btn btn-success" (click)="aplicarFiltro()">Filtrar</button>
         <button type="button" class="btn btn-danger" (click)="borrarFiltro()">Borrar filtros</button>
         </div>
       </form>
@@ -41,7 +41,7 @@
   <table *ngIf="users.length > 0">
     <thead>
     <th>Id</th>
-    <th>Nombre</th>
+    <th>Nombre  <i class="fas fa-arrow-down"></i></th>
     <th>Apellidos</th>
     <th>Email</th>
     <th>Rol</th>

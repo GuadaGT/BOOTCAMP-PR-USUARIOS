@@ -120,16 +120,20 @@ table {
 
 .button-container {
   margin-top: 20px;
-  .btn-primary{
+  .btn-success {
+    background-color: forestgreen;
     margin-left: 10px;
-    &:hover {
-      background-color: deepskyblue;
-      border-color:deepskyblue;
+    &:hover{
+      background-color: mediumseagreen;
+      border-color: mediumseagreen;
+      color: black;
       font-weight: bold;
     }
   }
   .btn-danger{
     margin-left: 20px;
+    background-color: dimgrey;
+    border-color:dimgrey;
     &:hover {
       background-color: darkred;
       border-color:darkred;

@@ -48,7 +48,6 @@ public class UserRestController {
     @GetMapping(value = "/users/{userId}")
     ResponseEntity<UserDto> getUserById(@PathVariable Long userId) {
         Optional<UserDto> user = this.userService.getUserById(userId);
-
         if (user.isPresent()) {
             return new ResponseEntity<>(user.get(), HttpStatus.OK);
         } else {

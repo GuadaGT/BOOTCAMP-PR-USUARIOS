@@ -24,8 +24,24 @@ label {
   }
 }
 
+.modal-footer {
+  .btn-cancel {
+    margin-left: 20px;
+    background-color: #DC3545;
+    border-color: #DC3545;
+    color: white;
+    &:hover {
+      background-color: darkred;
+      border-color:darkred;
+      font-weight: bold;
+    }
+  }
+}
+
 .btn-danger{
   margin-left: 20px;
+  background-color: dimgrey;
+  border-color:dimgrey;
   &:hover {
     background-color: darkred;
     border-color:darkred;

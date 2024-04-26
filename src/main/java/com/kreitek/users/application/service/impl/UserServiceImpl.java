@@ -8,7 +8,9 @@ import com.kreitek.users.domain.persistence.UserPersistence;
 import com.kreitek.users.domain.type.RolType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -72,6 +74,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<UserDto> getUsersByCriteriaStringPage(Pageable pageable, String filter) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "nombre");
+        pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
         Page<User> userPage = this.persistence.findAll(pageable,filter);
         return userPage.map(mapper::toDto);
     }

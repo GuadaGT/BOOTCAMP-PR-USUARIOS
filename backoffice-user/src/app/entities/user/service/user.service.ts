@@ -12,8 +12,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllUsers(page: number, size: number, sort: string, filters?: string, rolFilter?: string): Observable<User[]> {
-    let userUriAll = "http://localhost:8080/user/users?page=" + page + "&size=" + size + "&sort=" + sort;
+  public getAllUsers(page: number, size: number, filters?: string, rolFilter?: string): Observable<User[]> {
+    let userUriAll = "http://localhost:8080/user/users?page=" + page + "&size=" + size;
     if (filters) {
       userUriAll = userUriAll + "&filter=" + filters;
     }

@@ -13,7 +13,7 @@ export class UserListComponent implements OnInit {
   users: User[] = [];
   page: number = 0;
   size: number = 7;
-  sort: string = "nombre,asc";
+
   first: boolean = true;
   last: boolean = true;
   totalPages: number = 0;
@@ -102,7 +102,7 @@ export class UserListComponent implements OnInit {
   private getAllUsers(): void {
     const filters: string | undefined = this.buildFilters();
 
-    this.userService.getAllUsers(this.page, this.size, this.sort, filters).subscribe({
+    this.userService.getAllUsers(this.page, this.size, filters).subscribe({
       next: (data: any) => {
         this.users = data.content;
         this.first = data.first;
